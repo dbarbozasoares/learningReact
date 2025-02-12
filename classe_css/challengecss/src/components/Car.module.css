@@ -1,0 +1,12 @@
+.car_details{
+    align-items: center;
+    color: gray;
+   
+}
+.car_details h2{
+    color: green;
+}
+.car_details img{
+    width: 300px;
+    height: 300px;
+}
