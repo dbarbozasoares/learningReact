@@ -1,0 +1,31 @@
+export const wordsList = {
+  carro: ["Motor", "Porta", "Capo", "Pneu", "Antena", "Marcha"],
+  frutas: ["Maçã", "Banana", "Laranja", "Morango", "Uva", "Melancia"],
+  marcasDeCarro: ["Ferrari", "Mercedes", "BMW", "Audi", "Toyota", "Ford"],
+  animais: ["Leão", "Elefante", "Cavalo", "Cachorro", "Gato", "Girafa"],
+  cores: ["Vermelho", "Azul", "Verde", "Amarelo", "Preto", "Branco"],
+  instrumentosMusicais: [
+    "Guitarra",
+    "Piano",
+    "Bateria",
+    "Violão",
+    "Flauta",
+    "Saxofone",
+  ],
+  profissões: [
+    "Médico",
+    "Professor",
+    "Engenheiro",
+    "Advogado",
+    "Chef",
+    "Arquitetura",
+  ],
+  países: [
+    "Brasil",
+    "Estados Unidos",
+    "França",
+    "Japão",
+    "Alemanha",
+    "Argentina",
+  ],
+};
