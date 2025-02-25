@@ -1,0 +1,19 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Organic Face Cream",
+        "price": 29.99
+      },
+      {
+        "id": 2,
+        "name": "Herbal Shampoo",
+        "price": 19.99
+      },
+      {
+        "id": 3,
+        "name": "Natural Lip Balm",
+        "price": 9.99
+      }
+    ]
+  }
