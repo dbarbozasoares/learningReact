@@ -1,3 +1,14 @@
+.game-box{
+    position: fixed; /* Ensures it stays fixed to the screen */
+    top: 0; /* Aligns the box to the top of the screen */
+    left: 0; /* Aligns the box to the left of the screen */
+    width: 100%; /* 100% of the viewport width */
+    height: 100vh; /* 100% of the viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 .game h1{
     font-size: 2.5em;
 }
