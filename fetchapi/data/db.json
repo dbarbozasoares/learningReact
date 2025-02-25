@@ -1,19 +1,94 @@
 {
-    "products": [
-      {
-        "id": 1,
-        "name": "Organic Face Cream",
-        "price": 29.99
-      },
-      {
-        "id": 2,
-        "name": "Herbal Shampoo",
-        "price": 19.99
-      },
-      {
-        "id": 3,
-        "name": "Natural Lip Balm",
-        "price": 9.99
-      }
-    ]
-  }
+  "products": [
+    {
+      "id": "3",
+      "name": "Natural Lip Balm",
+      "price": 9.99
+    },
+    {
+      "id": "a827",
+      "name": "Olives",
+      "price": "12.99"
+    },
+    {
+      "id": "92fd",
+      "name": "Grapes",
+      "price": "9.99"
+    },
+    {
+      "id": "124a",
+      "name": "keyboard",
+      "price": "110"
+    },
+    {
+      "id": "c82d",
+      "name": "Pop",
+      "price": "5"
+    },
+    {
+      "id": "7324",
+      "name": "downtown",
+      "price": "9"
+    },
+    {
+      "id": "3d2d",
+      "name": "tennis",
+      "price": "55"
+    },
+    {
+      "id": "420c",
+      "name": "pie",
+      "price": "4"
+    },
+    {
+      "id": "ff70",
+      "name": "lol",
+      "price": "7"
+    },
+    {
+      "id": "ca35",
+      "name": "hotwhells",
+      "price": "6"
+    },
+    {
+      "id": "5d5d",
+      "name": "popppp",
+      "price": "11"
+    },
+    {
+      "id": "eca4",
+      "name": "alecvri",
+      "price": "98"
+    },
+    {
+      "id": "3005",
+      "name": "mouse",
+      "price": "60"
+    },
+    {
+      "id": "bf07",
+      "name": "suporte",
+      "price": "19.99"
+    },
+    {
+      "id": "535f",
+      "name": "cap",
+      "price": "25"
+    },
+    {
+      "id": "7be1",
+      "name": "pump",
+      "price": "28"
+    },
+    {
+      "id": "c16b",
+      "name": "bottle",
+      "price": "11"
+    },
+    {
+      "id": "d46e",
+      "name": "tampa",
+      "price": "99"
+    }
+  ]
+}
