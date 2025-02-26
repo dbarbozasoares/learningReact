@@ -1,0 +1,28 @@
+nav{
+    display: flex;
+    justify-content: center;
+}
+
+nav a{
+    margin: 0 10px;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover{
+    color: #CCC;
+}
+
+.active{
+    background-color: black;
+    color: #fff;
+}
+.esta-ativo{
+    background-color: black;
+    color: #fff;
+}
+.nao-ativo{
+    background-color: #fff;
+    color: black;
+}
