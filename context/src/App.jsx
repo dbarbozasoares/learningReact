@@ -6,7 +6,6 @@ import Contact from "./pages/Contact";
 import NavBar from "./components/NavBar";
 import ChangeCounter from "./components/ChangeCounter";
 
-import { useTitleColorContext } from "./hooks/useTitleColorContext";
 function App() {
   return (
     <div>
