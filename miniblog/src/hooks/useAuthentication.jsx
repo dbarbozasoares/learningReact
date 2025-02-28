@@ -1,4 +1,4 @@
-import { db } from "../firebase/config";
+import { db, app } from "../firebase/config";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -17,7 +17,7 @@ export const useAuthentication = () => {
   // deal with memory leak
   const [cancelled, setCancelled] = useState(false);
 
-  const auth = getAuth();
+  const auth = getAuth(app);
 
   function checkIfIsCancelled() {
     if (cancelled) return;
@@ -54,9 +54,70 @@ export const useAuthentication = () => {
     }
   };
 
+  // logout - sign out
+  const logout = () => {
+    checkIfIsCancelled();
+
+    signOut(auth);
+  };
+
+  const login = async (data) => {
+    if (checkIfIsCancelled()) return;
+
+    setLoading(true);
+    setError(null); // Limpar erros anteriores
+
+    // Verifique se o e-mail tem um formato válido
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(data.email)) {
+      setError("Por favor, insira um e-mail válido.");
+      setLoading(false);
+      return;
+    }
+    try {
+      console.log("Tentando login com email:", data.email); // Logar o email
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      console.log("Erro completo:", error);
+
+      try {
+        await signInWithEmailAndPassword(auth, data.email, data.password);
+        setLoading(false);
+      } catch (error) {
+        console.log("Erro completo:", error);
+        let systemErrorMessage; // error message
+
+        switch (error.code) {
+          case "auth/user-not-found":
+            systemErrorMessage = "Usuário não encontrado";
+            break;
+          case "auth/wrong-password":
+            systemErrorMessage = "Senha incorreta";
+            break;
+          case "auth/invalid-credential":
+            systemErrorMessage = "Credenciais inválidas fornecidas";
+            break;
+          case "auth/too-many-requests":
+            systemErrorMessage =
+              "Muitas tentativas de login. Por favor, tente novamente mais tarde.";
+            break;
+          case "auth/network-request-failed":
+            systemErrorMessage =
+              "Erro de rede. Verifique sua conexão e tente novamente.";
+            break;
+          default:
+            systemErrorMessage = "Ocorreu um erro, tente mais tarde";
+        }
+        setError(systemErrorMessage);
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
 
-  return { auth, createUser, error, loading };
+  return { auth, createUser, error, loading, logout, login };
 };
