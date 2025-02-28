@@ -3,7 +3,6 @@ import styles from "./CreatePost.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../context/AuthContext";
-import { useAuthentication } from "../../hooks/useAuthentication";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 
 const CreatePost = () => {
@@ -12,7 +11,6 @@ const CreatePost = () => {
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
   const [formError, setFormError] = useState("");
-  const { loading, error: createPostError } = useAuthentication();
   const { insertDocument, response } = useInsertDocument("posts");
   const { user } = useAuthValue();
   const navigate = useNavigate();
@@ -42,7 +40,7 @@ const CreatePost = () => {
       title,
       image,
       body,
-      tags,
+      tagsArray,
     });
     navigate("/");
   };
