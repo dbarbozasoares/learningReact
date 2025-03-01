@@ -1,5 +1,4 @@
 import styles from "./Home.module.css";
-import { Navigate } from "react-router-dom";
 
 // hooks
 import { useNavigate, Link } from "react-router-dom";
