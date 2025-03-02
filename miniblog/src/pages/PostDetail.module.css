@@ -9,7 +9,7 @@
 }
 
 .post_detail img{
-    max-width: 30vw;
+    max-width: 45vw;
     width: 100%;
 }
 
@@ -40,3 +40,9 @@
     margin-bottom: 1em;
     padding-left: 2vw;
 }
+
+@media only screen and (max-width: 600px) {
+    img{
+        min-width: 75vw;
+    }
+  }
