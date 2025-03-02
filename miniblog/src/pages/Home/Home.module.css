@@ -4,6 +4,10 @@
     align-items: center;
     justify-content: center;
   }
+
+  .home h1{
+    padding-left: 10px;
+  }
   
   .search_form {
     max-width: 100%;

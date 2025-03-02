@@ -17,7 +17,8 @@ const Home = () => {
     e.preventDefault();
     console.log(query);
     if (query) {
-      return navigate(`/search?q=${query}`);
+      let t = query.toLowerCase();
+      return navigate(`/search?q=${t}`);
     }
   };
   return (

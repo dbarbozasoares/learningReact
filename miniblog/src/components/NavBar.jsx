@@ -24,6 +24,7 @@ const NavBar = () => {
     <nav className={styles.navbar}>
       <NavLink to={"/"} className={styles.brand} onClick={closeMenu}>
         Mini <span>Blog</span>
+        <p>Logado como {user.displayName}</p>
       </NavLink>
 
       {/* Hamburger Icon */}

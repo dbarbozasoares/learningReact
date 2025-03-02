@@ -59,11 +59,11 @@
     .links_list {
       position: absolute;
       top: 60px;
-      left: 0;
-      width: 100%;
+      left: 78%;
+      width:100%;
       background-color: #333;
       flex-direction: column;
-      align-items: center;
+      align-items: left;
       display: none; /* Initially hide the links list */
       margin: 0;
       padding: 10px 0;
@@ -75,7 +75,7 @@
   
     .links_list li {
       width: 100%;
-      text-align: center;
+      text-align: left;
     }
   
     .links_list li a {
