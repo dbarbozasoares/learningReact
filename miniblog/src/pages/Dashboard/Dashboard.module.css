@@ -48,6 +48,7 @@
   
   .post_row p {
     color: #000;
+    font-size: 1.2em;
   }
   
   .post_row button,
@@ -55,5 +56,5 @@
     margin: 0 .1em;
     height: 2.2em;
     max-width: 47%;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }

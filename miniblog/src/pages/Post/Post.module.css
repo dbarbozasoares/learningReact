@@ -10,11 +10,10 @@
 .post_container .tags{
     display: flex;
     justify-content: center;
-    flex-direction: column;
 }
 
 .tags p{
-    margin-right: 1em;
+    margin-right: 1.2em;
     margin-bottom: .1em;
 }
 
@@ -24,6 +23,5 @@
 
 .post_container img{
     width: 100%;
-    max-width: 600px;
-    border-radius: 20%;
+    max-width: 35vw;
 }

@@ -19,7 +19,7 @@
   
   .search_form input {
     margin-right: 10px;
-    width: 50%;
+    width: 18vw;
   }
   
   .noposts {
@@ -32,9 +32,4 @@
   
   .noposts a {
     padding: 10px 25px;
-  }
-
-  img{
-    max-width: 400px;
-    width: 100%;
   }

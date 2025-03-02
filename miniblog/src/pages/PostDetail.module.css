@@ -1,5 +1,5 @@
 .post_detail{
-    margin-bottom: 3em;
+    margin-bottom: 2em;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -9,9 +9,8 @@
 }
 
 .post_detail img{
-    max-width: 400px;
+    max-width: 30vw;
     width: 100%;
-    border-radius: 15%;
 }
 
 .post_detail h2{
