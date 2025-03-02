@@ -12,7 +12,10 @@
     font-size: 1.2em;
     color: white;
   }
-  
+  .brand p{
+    font-style: italic;
+    font-size: .7em;
+  }
   .brand span {
     font-weight: 900;
     text-transform: uppercase;
@@ -42,35 +45,47 @@
     color: #fff;
   }
   
-  /* Hamburger Icon - Hidden by default */
   .menuIcon {
-    display: none;
+    display: none; /* Default: hidden on larger screens */
     cursor: pointer;
     font-size: 2rem;
-    color: white;
+    color: white; /* Ensure visibility */
+    position: absolute;
+    right: 20px; /* Adjust for proper positioning */
+    top: 15px;
+    z-index: 1000; /* Make sure it's on top */
   }
   
-  /* Media Query for Mobile Screens */
   @media (max-width: 768px) {
     .menuIcon {
-      display: block; /* Show hamburger icon on mobile */
+      display: block; /* Ensure the hamburger icon is visible */
+      cursor: pointer;
+      font-size: 2rem;
+      color: white;
+      position: absolute;
+      right: 20px; /* Position it on the right */
+      top: 15px;
+      z-index: 1000;
     }
   
     .links_list {
       position: absolute;
       top: 60px;
-      left: 78%;
-      width:100%;
+      right: 0; /* Move menu to the right */
+      width: 80%; /* Adjust width */
+      max-width: 150px; /* Ensure it doesn't take full width */
       background-color: #333;
       flex-direction: column;
-      align-items: left;
-      display: none; /* Initially hide the links list */
+      align-items: flex-start; /* Align text properly */
+      display: none;
       margin: 0;
       padding: 10px 0;
+      overflow-x: hidden;
+      border-radius: 10px 0 0 10px; /* Add rounded corner for styling */
     }
   
     .links_list.open {
-      display: flex; /* Show the menu when it's toggled */
+      display: flex; /* Show dropdown when active */
     }
   
     .links_list li {
