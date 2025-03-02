@@ -1,14 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { useAuthentication } from "../hooks/useAuthentication";
 import { useAuthValue } from "../context/AuthContext";
-import { useState } from "react"; // Import useState for toggling the menu
+import { useState, useRef, useEffect } from "react"; // Import necessary hooks
 
 import styles from "./NavBar.module.css";
 
 const NavBar = () => {
   const { user } = useAuthValue();
   const { logout } = useAuthentication();
-  const [menuOpen, setMenuOpen] = useState(false); // State to control the menu visibility
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Reference to the menu
 
   // Toggle menu visibility
   const toggleMenu = () => {
@@ -20,11 +21,31 @@ const NavBar = () => {
     setMenuOpen(false);
   };
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle logout and close the menu
+  const handleLogout = () => {
+    closeMenu(); // Close the menu before logging out
+    logout(); // Then proceed with logout
+  };
+
   return (
     <nav className={styles.navbar}>
       <NavLink to={"/"} className={styles.brand} onClick={closeMenu}>
         Mini <span>Blog</span>
-        <p>Logado como {user.displayName}</p>
+        {user ? <p>Ola, {user.displayName}</p> : <p>Bem vindo!</p>}
       </NavLink>
 
       {/* Hamburger Icon */}
@@ -33,7 +54,10 @@ const NavBar = () => {
       </div>
 
       {/* Links list */}
-      <ul className={`${styles.links_list} ${menuOpen ? styles.open : ""}`}>
+      <ul
+        ref={menuRef} // Attach ref to menu
+        className={`${styles.links_list} ${menuOpen ? styles.open : ""}`}
+      >
         <li>
           <NavLink
             to={"/"}
@@ -95,7 +119,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <button onClick={logout}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </>
         )}
