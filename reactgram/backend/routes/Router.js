@@ -6,6 +6,7 @@ const userRoutes = require("./UserRoutes");
 
 // Use the user routes
 router.use("/api/users", userRoutes);
+router.use("/api/photos", require("./PhotoRoutes"));
 
 // Test route
 router.get("/", (req, res) => {
