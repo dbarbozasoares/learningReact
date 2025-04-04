@@ -12,13 +12,37 @@ const register = async (data) => {
     if (res) {
       localStorage.setItem("user", JSON.stringify(res));
     }
+    return res;
   } catch (error) {
     console.log(error);
   }
 };
 
+// Logout user
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
+// Login user
+const login = async (user) => {
+  const config = requestConfig("POST", user);
+
+  try {
+    const res = await fetch(api + "/users/login", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
 const authService = {
   register,
+  logout,
+  login,
 };
 
 export default authService;
