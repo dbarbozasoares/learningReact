@@ -1,15 +1,15 @@
-/* eslint-disable no-unused-vars */
-import { uploads } from "../../utils/config";
 import "./EditProfile.css";
+import { uploads } from "../../utils/config";
 
 // Hooks
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
-import { profile, resetMessage } from "../../slices/userSlice";
+import { profile, updateProfile, resetMessage } from "../../slices/userSlice";
 
 // Components
+import LoadingAndError from "../../components/LoadingAndError";
 import Message from "../../components/Message";
 
 const EditProfile = () => {
@@ -19,7 +19,7 @@ const EditProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profileImage, setImageProfile] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const [bio, setBio] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
@@ -37,9 +37,40 @@ const EditProfile = () => {
     }
   }, [user]);
 
-  console.log(user);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Gather user data from states
+    const userData = {
+      name,
+    };
+
+    if (profileImage) {
+      userData.profileImage = profileImage;
+    }
+
+    if (bio) {
+      userData.bio = bio;
+    }
+
+    if (password) {
+      userData.password = password;
+    }
+
+    // build form data
+    const formData = new FormData();
+
+    const userFormData = Object.keys(userData).forEach((key) =>
+      formData.append(key, userData[key])
+    );
+
+    formData.append("user", userFormData);
+
+    await dispatch(updateProfile(formData));
+
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
   };
 
   // handles file uploaded from user
@@ -50,7 +81,7 @@ const EditProfile = () => {
     setPreviewImage(image);
 
     // update profile image
-    setImageProfile(image);
+    setProfileImage(image);
   };
   return (
     <div id="edit-profile">
@@ -58,7 +89,17 @@ const EditProfile = () => {
       <p className="subtitle">
         Add a profile pic and tell more about yourself...
       </p>
-      {/* Image preview */}
+      {(user.profileImage || previewImage) && (
+        <img
+          className="profile-image"
+          src={
+            previewImage
+              ? URL.createObjectURL(previewImage)
+              : `${uploads}/users/${user.profileImage}`
+          }
+          alt={user.name}
+        />
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -69,15 +110,15 @@ const EditProfile = () => {
         <input type="email" placeholder="E-mail" disabled value={email || ""} />
         <label>
           <span>Profile Image:</span>
-          <input type="file" />
+          <input type="file" onChange={handleFile} />
         </label>
         <label>
           <span>Bio:</span>
           <input
             type="text"
             placeholder="Profile description"
-            value={bio || ""}
             onChange={(e) => setBio(e.target.value)}
+            value={bio || ""}
           />
         </label>
         <label>
@@ -85,11 +126,12 @@ const EditProfile = () => {
           <input
             type="password"
             placeholder="Input your new password"
-            value={password || ""}
             onChange={(e) => setPassword(e.target.value)}
+            value={password || ""}
           />
         </label>
-        <input type="submit" value="Update" />
+        <LoadingAndError loading={loading} error={error} type={"Update"} />
+        {message && <Message msg={message} type="success" />}
       </form>
     </div>
   );

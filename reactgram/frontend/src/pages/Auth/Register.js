@@ -71,7 +71,7 @@ const Register = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           value={confirmPassword}
         />
-        <LoadingAndError loading={loading} error={error} type={"register"} />
+        <LoadingAndError loading={loading} error={error} type={"Register"} />
       </form>
       <p>
         Already registered? <Link to="/login">Click here</Link>

@@ -46,7 +46,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password || ""}
         />
-        <LoadingAndError loading={loading} error={error} type={"login"} />
+        <LoadingAndError loading={loading} error={error} type={"Login"} />
       </form>
 
       <p>
