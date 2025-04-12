@@ -10,6 +10,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import Profile from "./pages/Profile/Profile";
 
 // Hooks
 import { useAuth } from "./hooks/useAuth";
@@ -38,6 +39,10 @@ function App() {
             <Route
               path="/profile"
               element={auth ? <EditProfile /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/users/:id"
+              element={auth ? <Profile /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"
