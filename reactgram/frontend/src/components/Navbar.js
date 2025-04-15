@@ -10,7 +10,7 @@ import {
 } from "react-icons/bs";
 
 // Hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -27,9 +27,13 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(reset());
-
-    navigate("/login");
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
   return (
     <nav id="nav">
       <Link to="/">ReactGram</Link>

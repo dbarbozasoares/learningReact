@@ -4,9 +4,9 @@ import { uploads } from "../../utils/config";
 
 // components
 import LoadingAndError from "../../components/LoadingAndError";
+import Message from "../../components/Message";
 import { Link } from "react-router-dom";
 import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
-import Message from "../../components/Message";
 
 // hooks
 import { useState, useEffect, useRef } from "react";
@@ -15,7 +15,12 @@ import { useParams } from "react-router-dom";
 
 // redux
 import { getUserDetails } from "../../slices/userSlice";
-import { publishPhoto, resetMessage } from "../../slices/photoSlice";
+import {
+  publishPhoto,
+  getUserPhotos,
+  resetMessage,
+  deletePhoto,
+} from "../../slices/photoSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -38,12 +43,26 @@ const Profile = () => {
   const newPhotoForm = useRef();
   const editPhotoForm = useRef();
 
+  // Load user data
+  useEffect(() => {
+    dispatch(getUserDetails(id));
+    dispatch(getUserPhotos(id));
+  }, [dispatch, id]);
+
   // handles file uploaded from user
   const handleFile = (e) => {
     const image = e.target.files[0];
 
     setImage(image);
   };
+
+  // Reset component message
+  function resetComponentMessage() {
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -65,15 +84,14 @@ const Profile = () => {
 
     setTitle("");
 
-    setTimeout(() => {
-      dispatch(resetMessage());
-    }, 2000);
+    resetComponentMessage();
   };
 
-  // Load user data
-  useEffect(() => {
-    dispatch(getUserDetails(id));
-  }, [dispatch, id]);
+  // Delete photo
+  const handleDelete = (photoId) => {
+    dispatch(deletePhoto(photoId));
+    resetComponentMessage();
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -114,9 +132,39 @@ const Profile = () => {
               />
             </form>
           </div>
-          {errorPhoto && <Message msg={errorPhoto} type={"error"} />}
+          {messagePhoto && <Message msg={messagePhoto} type="success" />}
         </>
       )}
+      <div className="user-photos">
+        <h2>Published Photos</h2>
+        <div className="photos-container">
+          {photos &&
+            photos.map((photo) => (
+              <div className="photo" key={photo._id}>
+                {photo.image && (
+                  <img
+                    src={`${uploads}/photos/${photo.image}`}
+                    alt={photo.title}
+                  />
+                )}
+                {id === userAuth._id ? (
+                  <div className="actions">
+                    <Link to={`/photos/${photo._id}`}>
+                      <BsFillEyeFill />
+                    </Link>
+                    <BsPencilFill />
+                    <BsXLg onClick={() => handleDelete(photo._id)} />
+                  </div>
+                ) : (
+                  <Link className="btn" to={`/photos/${photo._id}`}>
+                    Look
+                  </Link>
+                )}
+                {photos.length === 0 && <p>No published photos found.</p>}
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
