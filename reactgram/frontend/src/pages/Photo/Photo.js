@@ -13,7 +13,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 // Redux
-import { getPhoto } from "../../slices/photoSlice";
+import { getPhoto, likePhoto } from "../../slices/photoSlice";
+import LikeContainer from "../../components/LikeContainer";
 
 const Photo = () => {
   const { id } = useParams();
@@ -33,13 +34,17 @@ const Photo = () => {
   }, [dispatch, id]);
 
   // Like and comment
+  const handleLike = () => {
+    dispatch(likePhoto(photo._id));
+  };
 
   if (loading) {
     return <p>Loading...</p>;
   }
   return (
-    <div className="photo">
+    <div id="photo">
       <PhotoItem photo={photo} />
+      <LikeContainer photo={photo} user={user} handleLike={handleLike} />
     </div>
   );
 };
