@@ -17,6 +17,7 @@ import { useAuth } from "./hooks/useAuth";
 
 //Router
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Photo from "./pages/Photo/Photo";
 
 function App() {
   const { auth, loading } = useAuth();
@@ -51,6 +52,10 @@ function App() {
             <Route
               path="/register"
               element={!auth ? <Register /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/photos/:id"
+              element={auth ? <Photo /> : <Navigate to="/login" />}
             />
           </Routes>
         </div>
