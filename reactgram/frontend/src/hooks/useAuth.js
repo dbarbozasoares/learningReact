@@ -8,12 +8,12 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("useEffect triggered", user);
     if (user) {
       setAuth(true);
     } else {
       setAuth(false);
     }
-
     setLoading(false);
   }, [user]);
 

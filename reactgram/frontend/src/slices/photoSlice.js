@@ -92,6 +92,26 @@ export const likePhoto = createAsyncThunk(
   }
 );
 
+// comment photo functionality
+export const commentPhoto = createAsyncThunk(
+  "photo/comment",
+  async (commentData, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const data = await photoService.commentPhoto(
+      { comment: commentData.comment },
+      commentData.id,
+      token
+    );
+
+    if (data.errors) {
+      return thunkAPI.rejectWithValue(data.errors[0]);
+    }
+    return data;
+  }
+);
+
+export const getPhotos = createAsyncThunk;
+
 export const photoSlice = createSlice({
   name: "publish",
   initialState,
@@ -196,6 +216,17 @@ export const photoSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(likePhoto.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(commentPhoto.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+
+        state.photo.comments.push(action.payload.comment);
+      })
+      .addCase(commentPhoto.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

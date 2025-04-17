@@ -16,7 +16,6 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
 
@@ -36,6 +35,9 @@ const Register = () => {
 
     dispatch(register(user));
   };
+  useEffect(() => {
+    console.log(">>> Register component MOUNTED");
+  }, []);
 
   // clean all auth states
   useEffect(() => {

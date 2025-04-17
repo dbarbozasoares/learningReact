@@ -146,7 +146,7 @@ const Profile = () => {
           <p>{user.bio}</p>
         </div>
       </div>
-      {id === userAuth._id && (
+      {userAuth && id === userAuth._id && (
         <>
           <div className="new-photo" ref={newPhotoForm}>
             <h3>Share something cool:</h3>
@@ -204,7 +204,7 @@ const Profile = () => {
                     alt={photo.title}
                   />
                 )}
-                {id === userAuth._id ? (
+                {userAuth && id === userAuth._id ? (
                   <div className="actions">
                     <Link to={`/photos/${photo._id}`}>
                       <BsFillEyeFill />
