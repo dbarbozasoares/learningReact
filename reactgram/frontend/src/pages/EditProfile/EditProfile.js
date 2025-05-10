@@ -34,6 +34,7 @@ const EditProfile = () => {
       setName(user.name);
       setEmail(user.email);
       setBio(user.bio);
+      console.log(user);
     }
   }, [user]);
 
@@ -100,7 +101,7 @@ const EditProfile = () => {
           alt={user.name}
         />
       )}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <input
           type="text"
           placeholder="Current name"

@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 //Redux
 import { logout, reset } from "../slices/authSlice";
+import { resetUser } from "../slices/userSlice";
 
 const Navbar = () => {
   const { auth } = useAuth();
@@ -27,13 +28,9 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(reset());
+    dispatch(resetUser());
   };
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user, navigate]);
   return (
     <nav id="nav">
       <Link to="/">ReactGram</Link>
