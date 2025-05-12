@@ -51,6 +51,7 @@ const Profile = () => {
 
   // Load user data
   useEffect(() => {
+    console.log(id);
     dispatch(getUserDetails(id));
     dispatch(getUserPhotos(id));
   }, [dispatch, id]);

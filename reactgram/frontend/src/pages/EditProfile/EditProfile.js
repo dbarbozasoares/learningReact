@@ -30,6 +30,7 @@ const EditProfile = () => {
 
   // Fill form with user data
   useEffect(() => {
+    console.log(user);
     if (user) {
       setName(user.name);
       setEmail(user.email);
@@ -61,11 +62,9 @@ const EditProfile = () => {
     // build form data
     const formData = new FormData();
 
-    const userFormData = Object.keys(userData).forEach((key) =>
-      formData.append(key, userData[key])
-    );
-
-    formData.append("user", userFormData);
+    Object.keys(userData).forEach((key) => {
+      formData.append(key, userData[key]);
+    });
 
     await dispatch(updateProfile(formData));
 
@@ -85,7 +84,7 @@ const EditProfile = () => {
     setProfileImage(image);
   };
   return (
-    <div id="edit-profile">
+    <div id="edit-profile" autoComplete="off">
       <h2>Edit your profile</h2>
       <p className="subtitle">
         Add a profile pic and tell more about yourself...
@@ -102,30 +101,47 @@ const EditProfile = () => {
         />
       )}
       <form onSubmit={handleSubmit} autoComplete="off">
+        {/* Anti-autofill hidden fields */}
+        <input type="text" name="fake-username" style={{ display: "none" }} />
+        <input
+          type="password"
+          name="fake-password"
+          style={{ display: "none" }}
+        />
+
         <input
           type="text"
+          name="display-name"
           placeholder="Current name"
           onChange={(e) => setName(e.target.value)}
           value={name || ""}
         />
-        <input type="email" placeholder="E-mail" disabled value={email || ""} />
+        <input
+          type="email"
+          name="user-email"
+          autoComplete="off"
+          placeholder="E-mail"
+          disabled
+          value={email || ""}
+        />
         <label>
           <span>Profile Image:</span>
           <input type="file" onChange={handleFile} />
         </label>
-        <label>
-          <span>Bio:</span>
-          <input
-            type="text"
-            placeholder="Profile description"
-            onChange={(e) => setBio(e.target.value)}
-            value={bio || ""}
-          />
-        </label>
+        <input
+          type="text"
+          name="not-a-bio"
+          autoComplete="new-password"
+          placeholder="Profile description"
+          onChange={(e) => setBio(e.target.value)}
+          value={bio || ""}
+        />
         <label>
           <span>Change password</span>
           <input
             type="password"
+            name="not-password"
+            autoComplete="new-password"
             placeholder="Input your new password"
             onChange={(e) => setPassword(e.target.value)}
             value={password || ""}
