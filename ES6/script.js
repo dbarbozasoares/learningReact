@@ -136,4 +136,3 @@ const hat = new ProductWithAttributes("Hat", 29.99, [
 console.log(`${hat.name} have these colors available:`);
 hat.displayColors();
 let whatever = 0;
-console.log("okok");
