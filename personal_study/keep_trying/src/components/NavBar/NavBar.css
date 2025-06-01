@@ -1,0 +1,27 @@
+.navbar-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+ul{
+    font-family: monospace;
+    font-size: 1.6em;
+    list-style-type: none;
+    text-align: center;
+}
+li{
+    padding-right: 0.8em;
+}
+.navbar-list a{
+    text-decoration: none;
+    color: rgb(250, 250, 250);
+    font-weight: bolder;
+}
+.navbar-top{
+    min-width: 100%;
+    background-color: rgba(128, 0, 128, 0.466);
+}
+#add-new-order{
+    font-size: 2em;
+}

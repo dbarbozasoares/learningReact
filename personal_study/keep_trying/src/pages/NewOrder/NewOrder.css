@@ -1,0 +1,15 @@
+#cloth-name{
+    padding-right: 2em;
+    font-size: 1.8em;
+}
+#cloth-price{
+    font-size: 1.8em;
+    padding-right: 1.4em;
+    border: 1px solid black;
+    text-align: center;
+}
+table{
+    padding: 1.2em;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,18 @@
+#decrease-qty{
+    border: 1px solid black;
+    margin-left: 2em;
+    position: absolute;
+    right: 15em;
+}
+
+.single-item-list{
+    margin-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vw;
+    border-right: 1em;
+    border-top: 1px solid black;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
